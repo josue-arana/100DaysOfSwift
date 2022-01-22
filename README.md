@@ -1,3 +1,3 @@
 # 100DaysOfSwift
-# 100DaysOfSwift
-# 100DaysOfSwift
+# #### Day 1
+
