@@ -251,3 +251,25 @@ print(collections)
  }
  */
 
+// *****************************************************
+// ******************  DAY 6  **************************
+// *****************************************************
+
+// LOOPS ------------------------
+// For loops let us loop over arrays, sets, dictionaries and ranges.
+// for name in names { ... }
+// for i in 1...5 { .Inclusive example. }
+// for i in 1..<5 { 1 up to 5 example, exlusive }
+// for _ in 1...5 { if we dont care about the care variable }
+
+// While loop: used for custom conditions.
+// Ex: while count < 10 { .. decrese count here .. }
+
+// Use continue to skip the current iteration and break to stop the loop at current iteration.
+
+// DIDN'T KNOW:
+// - Ternary operations WTF. What ? True : False
+// - Ranges are their own data type:  let count = 1...3
+// - Use random example. let ran = Int.random(in: 1...1000), decimals: Double.random(in: 0...1)
+// - 0 is an even number according to swift
+
