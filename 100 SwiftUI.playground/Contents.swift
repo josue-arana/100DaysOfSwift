@@ -273,3 +273,57 @@ print(collections)
 // - Use random example. let ran = Int.random(in: 1...1000), decimals: Double.random(in: 0...1)
 // - 0 is an even number according to swift
 
+// *****************************************************
+// ******************  DAY 7  **************************
+// *****************************************************
+
+// FUNCTIONS ------------------------
+// Parameters - place holders
+// Arguments - atual values being passed
+// Arguments must follow the order specified in the function.
+// One liner functions don't need the keyword return.
+// Parameters names can be used only internally using _ before the name
+// Ex. func isUppercase( _ str: String) -> Bool { ... }
+
+// We can use one parameter for external use and one for internal use
+/* Ex:
+    func printTimesTable(for number: Int) {
+        for i in 1...12 {
+            print("\(i) x \(nuber) is \(i * number)")
+        }
+    }
+    printTimesTable(for: 5)
+ */
+
+
+/* Challenge - Do two strings contain the same letters regardless of their order?
+    - Should accept two string parameters
+    - Return true if their letters are the same
+
+    func sameLetters(str1: String, str2: String) -> Bool {
+        str1.sorted() == str2.sorted()
+    }
+ */
+
+// TUPLES ----------------------
+// Can contain different data types.
+// They are a set size
+// Access them like user.firstName, where firstName is a key item of the tuple.
+// Swift knows tuple values are inside tuple so doesn't return optionals like dictionaries.
+// The dot notation prevets misspeling the keys.
+
+/* Example:
+    func getUser3() -> (firstName: String, lastName: String) {
+        ("Taylor, "Swift")      //no need to include the names in return stat
+    }
+    let user3 = getUsers()
+    //We can use destructuring too
+    let (firstName, lastName) = getUser3()
+    let (firstName, _ ) = getUsers3() //If we don't need second item.
+
+    //If named parameters, we can use names.
+    print("Name: \(user3.firstName) \(User3.lastName)")
+    
+    //or can use number order if with unnamed parameters
+    print("Name: \(user3.0) \(user3.1)" )
+ */
