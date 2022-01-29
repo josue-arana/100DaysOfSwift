@@ -1,3 +1,4 @@
 # 100DaysOfSwift
-# #### Day 1
 
+##### Days Completed: 
+1, 2, 3, 4, 5, 6, 7, 8
