@@ -355,3 +355,38 @@ do {
  SOLVED
  
  */
+
+
+// *****************************************************
+// ******************  DAY 9  **************************
+// *****************************************************
+
+
+/*  CLOSURES --------------
+    Copy a function (no parenthesis () )
+        Ex. let greetCopy = greetUser
+    Store function return value
+            let greetUserResult = greetUser()
+ 
+    Closure: very function like without function name, just constant.
+ 
+    Closure with no parameters:
+        let sayHello = {
+            print("Hi There")
+        }
+ 
+    Closure WITH parameters: inside braces and keywork in (marker, end of parameters and return type)
+        let sayHello = { (name:String) -> String in
+            "Hi \(name)!"
+ 
+    We can also pass functions into other functions
+        func captainFirstSorted (n1:String, n2:String) -> Bool { .. }
+        let captainFirstTeam = team.sorted(by: captainFirstSorted)
+ 
+    We can use call functions or closures inside a function.
+        Ex.
+            let captainFirstTeam = team.sorted(by: {(name1:String, name2:String) -> Bool in
+                ...
+            })
+ */
+
