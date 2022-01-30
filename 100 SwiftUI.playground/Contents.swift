@@ -6,26 +6,28 @@ import Cocoa
 
 //Variables - use keyword var
 //Constants use the keyword 'let' - constants never change and won't let us change it
-let char = "hello"
-var playerName = "Roy"
-playerName = "Danny"
+/*
+ let char = "hello"
+ var playerName = "Roy"
+ playerName = "Danny"
+*/
 
 //------------ Strings ------------
 //Quotes inside strings can be scaped with backslash \"quote\"
 //Lenght of strings with .count method
-print(playerName.count)   //5
+//print(playerName.count)   //5
 //UpperCase - .uppercased()
-playerName.uppercased()  //DANNY
+//playerName.uppercased()  //DANNY
 //HasPrefix - to know if string starts with string of our choosing.
-let movie = """
+/*let movie = """
 A day in
 the life of an
 Apple engineer
 """
 movie.hasPrefix("A day")
+*/
 
-
-//------------ INTEGERS ------------
+/*//------------ INTEGERS ------------
 //numbers can also be separated with _ To be easier to read.
 var score = -9_400.4
 score += 100        //compund assigned opeartors.
@@ -33,8 +35,9 @@ score += 100        //compund assigned opeartors.
 //isMultiple(of: _) - to know if a num is multiple.
 let number1 = 120
 number1.isMultiple(of: 3)
+*/
 
-//------------ FLOATING POINT VARIABLES ------------
+/*//------------ FLOATING POINT VARIABLES ------------
 //Design to hold number variables in memory, moving the point around hence floating point.
 //Decimals are not 100% accurate.
 //We cannot mix Ints and Doubles bc Swift thinks these are totally different types of vars.
@@ -51,9 +54,9 @@ c *= 2
 var d = 2 + 5.4
 //CGFloat - Cool Graphics... Give it double.
 //Floating points are very complex numbers because they need to be stored in binary, and the language has a system to find the closest approximation. Therefore we get 3.00000000000004 which makes it very precise when doing calculations.
+*/
 
-
-//------------ BOOLEANS (Jorge Bool - researching logic) ------------
+/*//------------ BOOLEANS (Jorge Bool - researching logic) ------------
 let filename = "paris.jpg"
 filename.hasSuffix(".jpg")
 filename.contains(".")
@@ -72,8 +75,9 @@ let name = "Taylor"
 let age = 25
 var message = "Hello, my name is \(name) and I'm \(age)"
 var exp = "5 x 5 = \(5*5)"
+*/
 
-//------------ CHECKPOINT 1 : Celcious to Farenheit conversion ------------
+/*//------------ CHECKPOINT 1 : Celcious to Farenheit conversion ------------
 //Creates a constant holding any temp in Celsius.
 //Conversts that temp to Fahrenheit by multiplying by 9, dividing by 5, then adding 32.
 //Prints the result showing both the Celcius and Farenheit values.
@@ -81,14 +85,14 @@ var exp = "5 x 5 = \(5*5)"
 let celsius = 25.0
 let fahrenheit = ((celsius * 9)/5 ) + 32
 print("\(celsius)° Celsius is \(fahrenheit)° in Fahrenheit")
-
+*/
 
 
 
 // *****************************************************
 // ******************  DAY 3  **************************
 // *****************************************************
-
+/*
 //Arrays - Collection of values that are stored as a single value.
 var scores  = Array<Int>()
 var albums = [String]()
@@ -148,17 +152,19 @@ day = Weekday.friday
 var month = months.april
 month = .january
 print(month)
-
+*/
 
 // *****************************************************
 // ******************  DAY 4  **************************
 // *****************************************************
 
 //TYPE ANNOTATIONS: All of these are the same
-var soda: [String] = ["Coke", "Pepsi", "Irn-Bru"]
-var teams: [String] = [String]()
-var cities: [String] = []
-var clues = [String]()
+/*
+ var soda: [String] = ["Coke", "Pepsi", "Irn-Bru"]
+ var teams: [String] = [String]()
+ var cities: [String] = []
+ var clues = [String]()
+ */
 
 //When to use type annotations? One ex. is constants that don't have value yet.
 //Use type inference as much as possible, when swift decides or clues = [String]()
@@ -167,29 +173,33 @@ var clues = [String]()
 //Sumary Complex data
 //Arrays are always of one specific type.
 //Array methods: count, indexOf
-var numss = [Int](repeating: 10, count: 5)
-numss.insert(4, at: 0)
-numss.first
-numss.append(2)
-numss.last
-numss.remove(at: 3)
-numss.removeLast()
-numss.sorted()
-numss.reversed()
+/*
+ var numss = [Int](repeating: 10, count: 5)
+ numss.insert(4, at: 0)
+ numss.first
+ numss.append(2)
+ numss.last
+ numss.remove(at: 3)
+ numss.removeLast()
+ numss.sorted()
+ numss.reversed()
 
-var numbers = [1,2,3,4]
-let doubled = numbers.map{ $0 * 2}
-print(doubled)
-let singers = ["John", "Paul", "George"]
-let uppercased = singers.map{ $0.uppercased() }
-print(uppercased)
+ var numbers = [1,2,3,4]
+ let doubled = numbers.map{ $0 * 2}
+ print(doubled)
+ let singers = ["John", "Paul", "George"]
+ let uppercased = singers.map{ $0.uppercased() }
+ print(uppercased)
+ */
+
 //Dictionaries: store many values, and read them using keys we specify.
-let results = ["Meghan": 80, "Chris": 90, "Charlotte": 95]
-let formattedResults = results.mapValues{ "Score: \($0) "}
-print(formattedResults)
-//.merge and .merging
-//merge() - merges one dictionary with another in place
-//merging() – merge both dictionaries and returns a new dictionary.
+/*
+ let results = ["Meghan": 80, "Chris": 90, "Charlotte": 95]
+ let formattedResults = results.mapValues{ "Score: \($0) "}
+ print(formattedResults)
+ //.merge and .merging
+ //merge() - merges one dictionary with another in place
+ //merging() – merge both dictionaries and returns a new dictionary.
 var hexColors1 = ["red": "#ff0000", "green": "#00ff00"]
 let hexColors2 = ["blue": "#0000ff"]
 hexColors1.merge(hexColors2) { (_, second) in second }
@@ -204,6 +214,7 @@ let passes = results.filter { key, value in
     return true
 }
 print(passes)
+ */
 //.reserveCapacity(50) - reserves enough space to hold 50 items.
 
 //Sets: stores the items in a highly optimized way but unordered.
@@ -215,7 +226,7 @@ print(passes)
 
 
 
-//------------ CHECKPOINT 2:  ------------
+/*------------ CHECKPOINT 2:  ------------
 //Create an array of strings, then write some code that prints the number items in the array and also the number of unique items in the array.
 var collections: [String] = ["arrays", "dictionaries" , "sets"]
 collections.append("arrays")
@@ -229,6 +240,8 @@ print("Collections have \(unique.count) unique items.")
 
 collections+=["chela"]
 print(collections)
+*/
+
 
 // *****************************************************
 // ******************  DAY 5  **************************
@@ -388,5 +401,12 @@ do {
             let captainFirstTeam = team.sorted(by: {(name1:String, name2:String) -> Bool in
                 ...
             })
+    
+    let team = ["Gloria", "Suzanne", "Piper", "Tiffany", "Tasha"]
+ 
+    //Short hand syntax: useful for sorted, filter and map:
+        let reverseTeam = team.sorted { $0 > $1 }
+        let tOnly = team.filter { $0.hasPrefix("T) }
+        let uppercaseTeam = team.map { $0.uppercased() } 
  */
 
