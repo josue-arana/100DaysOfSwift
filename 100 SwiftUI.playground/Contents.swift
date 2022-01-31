@@ -407,6 +407,48 @@ do {
     //Short hand syntax: useful for sorted, filter and map:
         let reverseTeam = team.sorted { $0 > $1 }
         let tOnly = team.filter { $0.hasPrefix("T) }
-        let uppercaseTeam = team.map { $0.uppercased() } 
+        let uppercaseTeam = team.map { $0.uppercased() }
  */
 
+// *****************************************************
+// ******************  DAY 10  **************************
+// *****************************************************
+
+/* STRUCTS ------------------
+Need mutating function to change the value of the properties in structs
+ struct Employee {
+     let name: String
+     var vacationRemaining: Int
+
+     mutating func takeVacation(days: Int) {
+         if vacationRemaining > days {
+             vacationRemaining -= days
+             print("I'm going on vacation!")
+             print("Days remaining: \(vacationRemaining)")
+         } else {
+             print("Oops! There aren't enough days remaining.")
+         }
+     }
+ }
+ var archer = Employee(name: "Sterling Archer", vacationRemaining: 14)
+ archer.takeVacation(days: 5)
+ print(archer.vacationRemaining)
+ 
+ - Stored Properties
+ 
+ - Computed Properties: calculated dynamically, every single time, must have explicit type,
+ and cannot be a constant.
+    var vacationRemaining: Int {
+        vacationAllocated - vacationTaken
+    }
+ 
+ //Propety Observers
+    -  Swift’s property observers let us attach functionality to be run before or after a property is changed, using willSet and didSet respectively. No constants
+ 
+    - Custom struct initializers : init, self. NOTE: All properties must have value inside init
+    init(name: String, number: Int) {
+        self.name = name
+        self.number = number
+    }
+ 
+ */
