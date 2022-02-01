@@ -452,3 +452,100 @@ Need mutating function to change the value of the properties in structs
     }
  
  */
+
+
+
+// *****************************************************
+// ******************  DAY 11  *************************
+// *****************************************************
+
+/*
+ // Access Control ------------------- (private)
+ 
+ private - Don't let anything ousite the struct use this.
+ fileprivate - Don't let anything outside the current file use this.
+ public - Let anyone, anywhere use this.
+ private(set) - Let anyone read this property, but only let internal methos write it.
+ 
+ // Static Properties and methods ------------
+ - Static means that does not belong to the instance, but belong to the object itself.
+ - static methods dont need mutating.
+ - useful for example data and also for structs used in all code.
+ - static methods CANNOT read non-static methods.
+ - non-static methods CAN read static methods.
+    - self: the current value of a struct 55, "Hello", true
+    - Self: the current type of struct    Int, String, Bool
+
+
+struct App {
+    var name: String
+    private var sales = 0
+    init(name: String) {
+        self.name = name
+    }
+}
+let spotify = App(name: "Spotify")
+
+struct Pokemon {
+    static var numberCaught = 0
+    var name: String
+    static func catchPokemon() {
+        print("Caught!")
+        Pokemon.numberCaught += 1
+    }
+}
+
+ // ========================= STRUCTS SUMMARY ===============================
+ - You can create your own structs by writing struct, giving it a name, then placing the struct’s code inside braces.
+ - Structs can have variable and constants (known as properties) and functions (known as methods)
+ - If a method tries to modify properties of its struct, you must mark it as mutating.
+ -You can store properties in memory, or create computed properties that calculate a value every time they are accessed.
+ - We can attach didSet and willSet property observers to properties inside a struct, which is helpful when we need to be sure that some code is always executed when the property changes.
+ - Initializers are a bit like specialized functions, and Swift generates one for all structs using their property names.
+ - You can create your own custom initializers if you want, but you must always make sure all properties in your struct have a value by the time the initializer finishes, and before you call any other methods.
+ - We can use access to mark any properties and methods as being available or unavailable externally, as needed.
+ - It’s possible to attach a property or methods directly to a struct, so you can use them without creating an instance of the struct.
+ 
+ 
+ */
+
+// Checkpoint 6 - Structs
+
+struct Car {
+    let model: String
+    let numOfSeats: Int
+    private var currentGear: Int {
+        didSet {
+            print("Gear was \(oldValue) and now is \(currentGear)")
+        }
+    }
+    
+    init(model:String, numOfSeats:Int) {
+        self.model = model
+        self.numOfSeats = numOfSeats
+        self.currentGear = 0
+    }
+    
+    mutating func changeGear(_ gearChange: Int){
+        
+        if currentGear + gearChange < 0 {
+            print("You cannot go lower than gear 0")
+            return
+        }else if currentGear + gearChange > 10 {
+            print("This car has maximum of 10 gears")
+            return
+        }
+        
+        currentGear += gearChange
+    }
+}
+
+
+var honda = Car(model: "Honda", numOfSeats: 4)
+honda.changeGear(+1)
+honda.changeGear(4)
+honda.changeGear(-2)
+honda.changeGear(-4)
+honda.changeGear(+44)
+
+
