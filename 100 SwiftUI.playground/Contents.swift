@@ -507,7 +507,7 @@ struct Pokemon {
  - It’s possible to attach a property or methods directly to a struct, so you can use them without creating an instance of the struct.
  
  
- */
+
 
 // Checkpoint 6 - Structs
 
@@ -547,5 +547,364 @@ honda.changeGear(4)
 honda.changeGear(-2)
 honda.changeGear(-4)
 honda.changeGear(+44)
+ */
+
+// *****************************************************
+// ******************  DAY 12  *************************
+// *****************************************************
+
+/* ------------ CLASSES -------------
+ Similarities:
+    - You can create and name them you please
+    - Add properties, methods, obeservers and access controls
+    - Create custom initializers to configure new instances
+ Differences:
+    - (child class can inherit from parent) Make one class build upon funcionality in another class
+    - (no memberwise init)Swift won't generate a memberwise initializer for class (bc of 1st point)
+    - (instances are passed by reference) If you have instance of class, both copies share the same data
+    - (deinitializer) We can add a deinitializer to run when the final copy is destroyed
+    - (constant classes can have var changed) Constants class instances can have their variable properties changed.
+ 
+ Overrides
+    override func printSummary() {
+        print("I'm a developer who will sometimes work \(hours) a day.")
+    }
+    
+    - override is not needed when the parent/child methods have diff return type or parameters.
+    - 'final class' used to indicate the class will NOT have any child classes.
+    - classes MUST have a custom initializer
+    
+ Example:
+ 
+ class Vehicle {
+     let isElectric: Bool
+
+     init(isElectric: Bool) {
+         self.isElectric = isElectric
+     }
+ }
+ class Car: Vehicle {
+     let isConvertible: Bool
+
+     init(isElectric: Bool, isConvertible: Bool) {
+         self.isConvertible = isConvertible
+         super.init(isElectric: isElectric)
+     }
+ }
+ 
+ Copy classes:
+ 
+
+ class User {
+     var username = "Anonymous"
+
+     func copy() -> User {
+         let user = User()
+         user.username = username
+         return user
+     }
+ }
+ var user1 = User()
+var user2 = user1  //.copy()
+ user2.username = "Taylor"
+
+ print(user1.username)
+ print(user2.username)
+ 
+ 
+ Deinitializers --------
+ 
+ deinit { .... } //note: no func, no parenthesis, no return. cannot call directly
+ 
+ 
+ 
+ /* ----------------- Checkpoint 7 ------------------ */
+ 
+class Animal {
+    var legs: Int
+    init(legs: Int){
+        self.legs = legs
+    }
+}
+
+class Dog: Animal {
+    init() {
+        super.init(legs: 4)
+    }
+    
+    func speak(){
+        print("I am a Dog")
+    }
+}
+
+class Corgi: Dog {
+    override func speak() {
+        print("I am a Corgi!")
+    }
+}
+
+class Poodle: Dog {
+    override func speak() {
+        print("I am a Poole!")
+    }
+}
+
+class Cat: Animal {
+    var isTame: Bool
+    init(isTame: Bool) {
+        self.isTame = isTame
+        super.init(legs: 4)
+    }
+    func speak(){
+        print("I'm a cat, meow")
+    }
+}
+
+class Persian: Cat {
+    init() {
+        super.init(isTame: true)
+    }
+    override func speak() {
+        print("Im a Persian cat")
+    }
+}
+
+class Lion {
+    init() {
+    }
+    func speak() {
+        print("Im a lion!!")
+    }
+}
+
+var corgi = Corgi()
+corgi.speak()
+var persi = Persian()
+persi.speak()
+var lion = Lion()
+lion.speak()
+ */
+
+//    func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+//
+//        var dict = [Int:Int]()
+//        var idx = 0
+//
+//        for num in nums {
+//            let complement = target - num
+//
+//            if dict.keys.contains(complement) {
+//                return [ dict[complement]!, idx]
+//            }
+//            dict[num] = idx
+//            idx += 1
+//        }
+//        return []
+//    }
+//
+//let res = twoSum([2,7,4,7,8], 9)
+//print(res)
+
+// *****************************************************
+// ******************  DAY 13  *************************
+// *****************************************************
+
+/*
+ // ----------------------- PROTOCOLS -----------------------
+    - Allow us to treat our data in more general terms.
+    - Similar behavior to an abstract class, that is used as a blueprint for other structures.
+    - Structures/Classes conforming to a protocol MUST implement all the functions and use any properties if specified.
+    - If has more than one protocol use comma, and if you want to extend a class then list it first.
+    
+ 
+   protocol Vehicle {
+     var name: String { get }
+     var currentPassengers: Int { get set }
+     func estimateTime(for distance: Int) -> Int
+     func travel(distance: Int)
+    }
+ 
+    // OPAQUE RETURN TYPES - Keyword: SOME. like.. -> some Equitable or -> some View -> some Vehicle.
+    // but swift knows which type specifically.
+ 
+    // Extensions - let us add functionality
 
 
+
+var quote = "  The truth is Raely pure and never simple   "
+
+print(quote)
+quote.trimmingCharacters(in: .whitespaces)
+
+extension String {
+    func trimmed() -> String {
+        self.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+}
+extension String {
+    mutating func trim() {
+        self = self.trimmed()
+    }
+}
+
+print(quote)
+quote.trim()
+print(quote)
+ 
+ 
+ Protocols are like contracts for code. (blueprint/abstract class)
+ Opaque return types let us hide some information in our code. (some Vehicle)
+ Extensions let us add functionality to extisting types. (method or computed properties)
+ Protocol extensions let us add functionality to many types all at once.
+ 
+*/
+
+
+/* ----------------- Checkpoint 8 ------------------ */
+/*
+ Your challenge is this: make a protocol that describes a building, adding various properties and methods, then create two structs, House and Office, that conform to it. Your protocol should require the following:
+
+ A property storing how many rooms it has.
+ A property storing the cost as an integer (e.g. 500,000 for a building costing $500,000.)
+ A property storing the name of the estate agent responsible for selling the building.
+ A method for printing the sales summary of the building, describing what it is along with its other properties.
+
+
+protocol Building {
+    var rooms: Int { get }
+    var cost: Int { get set }
+    var agentName: String { get set }
+    func salesSummary()
+}
+
+struct House: Building {
+    var rooms: Int
+    var cost: Int
+    var agentName: String
+    func salesSummary() {
+        let summ = """
+            This house has \(rooms) rooms and costs $\(cost).
+                - \(agentName)
+            """
+        print(summ + "\n")
+    }
+}
+struct Office: Building {
+    var rooms: Int
+    var cost: Int
+    var agentName: String
+    
+    func salesSummary() {
+        let summ = """
+            This office has \(rooms) rooms and costs $\(cost).
+                - \(agentName)
+
+            """
+        print(summ + "\n")
+        
+    }
+}
+
+let home = House(rooms: 3, cost: 500_000, agentName: "Sara Parker")
+home.salesSummary()
+
+let off = Office(rooms: 4, cost:  600_000, agentName: "Tony Spark")
+off.salesSummary()
+
+ */
+
+// *****************************************************
+// ******************  DAY 13  *************************
+// *****************************************************
+
+
+/*
+  // OPTIONALS -------------
+    - cannot use if let statement on non-optionals
+    - cannot compare optionals with other types without unwrapping it.
+
+            var opposites = ["Mario": "Wario" , "Luigi" : "Waluigi" ]
+
+            if let marioOpp = opposites["Peach"] {
+                print("Mario opposit is \(marioOpp)")
+            } else{
+                print("The optional was empty")
+            }
+
+
+            func square(number:Int) -> Int {
+                number * number
+            }
+
+            var number: Int? = nil
+
+            if let number = number {        //shadowing technique used when unwrapping optionals in if statements.
+                print(square(number: number))
+            }
+
+    // UNWRAP OPTIONALS WITH GUARD.
+                    
+             var myVar: Int? = 3
+             
+             if let unwrapped = myVar {
+                // Run if myVar has a value inside
+             }
+             
+             guard let unwrapped = myVar else {
+                // Run if myVar does NOT have a value inside
+             }
+             
+             let new = captains["Serenity"] ?? "N/A"
+             let new = captains["Serenity", default: "N/A"]
+             
+             let tvShows = ["Archer", "Babylon 5", "Ted Lasso"]
+             let favorite = tvShows.randomElement() ?? "None"
+             
+             let input = ""
+             let number = Int(input) ?? 0
+             print(number)
+             
+             
+             let names = ["Arya", "Bran", "Robb", "Sansa"]
+
+             let chosen = names.randomElement()?.uppercased() ?? "No one"
+             print("Next in line: \(chosen)")
+             
+             let captains: [String]? = ["Archer", "Lorca", "Sisko"]
+             let lengthOfBestCaptain = captains?.last?.count
+
+ */
+
+
+
+/*
+    Checkpoint 9
+        write a function that accepts an optional array of integers, and returns one randomly.
+        If the array is missing or empty, return a random number in the range 1 through 100.
+        Only one line of code.
+
+    Solution:
+    func getRandomInt( numbers: [Int]? ) -> Int { return numbers?.randomElement() ?? Int.random(in: 1...100) }
+    getRandomInt(numbers: nil)
+ */
+
+func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
+
+        var dict = [Int:Int]()
+        var idx = 0
+
+        for num in nums {
+            let complement = target - num
+
+            if dict.keys.contains(complement) {
+                
+                return [ dict[complement, default:0] , idx]
+            }
+            dict[num] = idx
+            idx += 1
+        }
+        return []
+    }
+
+let res = twoSum([4,8,4,7,8], 15)
+print(res)
