@@ -908,3 +908,21 @@ func twoSum(_ nums: [Int], _ target: Int) -> [Int] {
 
 let res = twoSum([4,8,4,7,8], 15)
 print(res)
+
+
+// *****************************************************
+// ******************  DAY 16  *************************
+// *****************************************************
+
+
+/*
+ We cannot have more than 10 elements inside an element, therefore we use group and section to go around this limitation.
+ Modifying Program State
+    - We use the @State in front of variables bc some of the structs like ContantView are constant.
+ Binding State to user interface controls
+    - We use $name when getting input data for strings.
+ Creating Views in a loop
+    - 
+ 
+ 
+ */
