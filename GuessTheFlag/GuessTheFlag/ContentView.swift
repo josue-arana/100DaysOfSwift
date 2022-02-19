@@ -7,6 +7,41 @@
 
 import SwiftUI
 
+//Custom View Modifier
+struct flagImage: ViewModifier {
+    var country : String
+    
+    func body(content: Content) -> some View {
+        Image(country)
+            .resizable()
+            .renderingMode(.original)
+            .clipShape(Circle())
+            .frame(width: 125, height: 125)
+            .shadow(radius: 55)
+    }
+}
+
+struct BlueTitle : ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .font(.largeTitle)
+            .foregroundColor(.blue)
+    }
+}
+
+//Extension for custom modifier.
+extension View {
+    func FlagImage(of country: String) -> some View {
+        modifier(flagImage(country: country))
+    }
+    
+    func blueTitle() -> some View {
+        modifier(BlueTitle())
+    }
+}
+
+
+
 struct ContentView: View {
     
     @State private var showingScore = false
@@ -43,8 +78,9 @@ struct ContentView: View {
                                 .foregroundStyle(.secondary)
                                 .font(.subheadline.weight(.heavy))
                             Text(countries[correctAnswer])
-                                .foregroundStyle(.primary)
-                                .font(.largeTitle.weight(.semibold))
+                                .blueTitle()
+//                                .foregroundStyle(.primary)
+//                                .font(.largeTitle.weight(.semibold))
                         }
                         
                         ForEach(0..<3) { number in
@@ -55,12 +91,8 @@ struct ContentView: View {
                                 
                                 
                             } label: {
-                                Image(countries[number])
-                                    .resizable()
-                                    .renderingMode(.original)
-                                    .clipShape(Circle())
-                                    .frame(width: 125, height: 125)
-                                    .shadow(radius: 55)
+                                //Custom View modifier
+                                FlagImage(of: countries[number])
                             }
                         }
                     }
