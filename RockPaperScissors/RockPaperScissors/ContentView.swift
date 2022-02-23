@@ -11,28 +11,57 @@ import SwiftUI
 struct InstructionsView: View {
     
     private var gameRules = """
-    if the app chose “Rock” and “Win” the player would need to choose “Paper”,
-    but if the app chose “Rock” and “Lose” the player would need to choose “Scissors”.
+    The purpose of this game is to server as a brain teaser.
+    
+    Round Fules:
+    The app will choose a move and tell the player as a rule that needs to win or lose the round. Then the player chooses one of the moves available that corresponds to the round rule.
+    
+    Coins:
+    The player gets a coin for every correct
+    
+    Example:
+    If the app chose “Rock” and “You need to Win” the player would need to choose “Paper”, but if the app chose “Rock” and “Lose” the player would need to choose “Scissors”.
     """
     
+//    @State var closeView: Bool
     
     var body : some View {
         
         
         ZStack {
-            LinearGradient(colors: [.white,.blue], startPoint: .top, endPoint: .bottom)
+            LinearGradient(colors: [.black,.indigo], startPoint: .top, endPoint: .bottom)
                 .ignoresSafeArea()
             
             VStack {
-                Button("Start Game"){
-    //                startGame()
-                }
-                .frame(width: 250, height: 80, alignment: .center)
+//                HStack{
+//                    Spacer()
+//                    Button(action: {
+//                        closeView.toggle()
+//                    }){
+//                        Image(systemName: "x.circle")
+//                            .resizable()
+//                            .foregroundColor(.white)
+//                            .frame(width: 25, height: 25, alignment: .trailing)
+//                            .padding()
+//                    }
+//                }.padding(.trailing)
                 
-                Text("Game Rules:")
+                Text("RPS GAME")
+                    .font(.largeTitle)
+                    .foregroundColor(.white)
+                Text("(Rock Paper Scissors)")
+                    .font(.title2)
+                    .foregroundColor(.white)
+                    .frame(alignment: .center)
+                Text("By Josue Arana")
+                    .font(.title3)
+                    .foregroundColor(.white)
+                    .frame(alignment: .center)
+                
                 Text(gameRules)
-                    .font(.caption)
-                    .padding(100)
+                    .font(.title3)
+                    .foregroundColor(.white)
+                    .padding(30)
             }
         } //End zstack
     }
@@ -52,7 +81,7 @@ struct ContentView: View {
     @State private var showScore = false
     private var darkBlue = Color(red: 34, green: 56, blue: 100)
     
-    @State private var showInstructions = false
+    @State private var showInstructions = true
     @State private var questionCount = 1
     @State private var correctPopUp = false
     @State private var incorrectPopUp = false
@@ -111,10 +140,8 @@ struct ContentView: View {
             
             VStack {
                 
-                
-                HStack{
-                    //player's score
-                    
+                HStack { //Instructions,
+                    //Game Instructions menu button
                     Button(action: {
                         self.showInstructions.toggle()
                     })
@@ -159,9 +186,9 @@ struct ContentView: View {
                         .font(.system(size: 23))
                         .foregroundStyle(.gray)
                     //Win or Lose
-                    Text(shouldWin ? "Need to Win" : "Need to Lose")
+                    Text(shouldWin ? "You need to win" : "You need to lose")
                         .padding(.bottom)
-                        .font(.system(size: 33))
+                        .font(.system(size: 32))
                         .foregroundStyle(.white)
                 }
                 .offset(y:55)
@@ -188,7 +215,7 @@ struct ContentView: View {
                                 .foregroundColor(.green)
                                 .frame(width: 200, height: 200, alignment: .center)
                                 .offset(y:15)
-                                .animation(.easeInOut(duration: 1), value: correctPopUp)
+                                .animation(.easeIn, value: correctPopUp)
                             
                         }
                         if incorrectPopUp {
@@ -197,14 +224,12 @@ struct ContentView: View {
                                 .foregroundColor(.red)
                                 .frame(width: 200, height: 200, alignment: .center)
                                 .offset(y:15)
-                                .animation(.easeInOut(duration: 1), value: incorrectPopUp)
+                                .animation(.easeIn, value: incorrectPopUp)
                             
                         }
                     }
                     
                     
-                    
-                        
                     
                     
                     Spacer()
@@ -219,20 +244,21 @@ struct ContentView: View {
                             
                             Button (action: {
                                 isCorrect = checkChoice(appChoice: appChoice, playerChoice: option , shouldWin: shouldWin)
-                                
-                                if isCorrect {
-                                    score += 1
-                                    correctPopUp = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        self.correctPopUp = false
-                                    }
-                                }else{
-                                    if score > 0{
-                                        score -= 1
-                                    }
-                                    incorrectPopUp = true
-                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                                        self.incorrectPopUp = false
+                                withAnimation{
+                                    if isCorrect {
+                                        score += 1
+                                        correctPopUp = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                            self.correctPopUp = false
+                                        }
+                                    }else{
+                                        if score > 0{
+                                            score -= 1
+                                        }
+                                        incorrectPopUp = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                            self.incorrectPopUp = false
+                                        }
                                     }
                                 }
                                 
@@ -244,6 +270,7 @@ struct ContentView: View {
                                 askQuestion()
                                 
                             }) {
+                            
                                 Image(option)
                                     .resizable()
                                     .renderingMode(.original)
