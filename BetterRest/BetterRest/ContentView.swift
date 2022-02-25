@@ -14,9 +14,11 @@ struct ContentView: View {
     @State private var sleepAmount = 8.0
     @State private var coffeeAmount = 1
     
-    @State private var alertTitle = ""
-    @State private var alertMessage = ""
+    @State private var alertTitle = "Your ideal Bedtime is "
+    @State private var alertMessage = " 10:38 PM"
     @State private var showingAlert = false
+    
+    
     
     static var defaultWakeTime: Date {
         var components = DateComponents()
@@ -28,36 +30,73 @@ struct ContentView: View {
     var body: some View {
         
         NavigationView{
-            Form{
-                VStack (alignment: .leading, spacing: 0){
-                        Text("When do you want to wake up?")
-                        .font(.headline)
+            
+//            VStack {
+                
+            
+                Form{
                     
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
-                }
-                VStack (alignment: .leading, spacing: 0){
-                    Text("Desired amount of sleep")
-                        .font(.headline)
+                    VStack {
+                        Text("Recommended Bed Time:")
+                            .font(.title2)
+                        Text("\(alertMessage)")
+                            .font(.title2)
+                    }
+                    .padding()
                     
-                    Stepper("\(sleepAmount.formatted()) hours ", value: $sleepAmount, in: 4...12, step: 0.25)
+                    VStack (alignment: .leading, spacing: 0){
+                            Text("When do you want to wake up?")
+                            .font(.headline)
+                        
+                        DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                    }
+                    .padding()
+                    VStack (alignment: .leading, spacing: 0) {
+                        Text("Desired amount of sleep")
+                            .font(.headline)
+                        
+                        Stepper("\(sleepAmount.formatted()) hours ", value: $sleepAmount, in: 4...12, step: 0.25){_ in
+                            calculateBedtime()
+                        }
+                    }
+                    .padding()
+                    VStack (alignment: .leading, spacing: 0){
+                        Text("Daily coffee intake")
+                            .font(.headline)
+                        
+                        Stepper(coffeeAmount == 1 ? "1 cup": "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20){_ in
+                            calculateBedtime()
+                        }
+    //                    Picker(coffeeAmount == 1 ? "1 cup": "\(coffeeAmount) cups", selection: $coffeeAmount){
+    //                        ForEach(1..<21){ i in
+    //                            Text("\(i)")
+    //                        }
+                        
+                    }
+                    .padding()
                 }
-                VStack (alignment: .leading, spacing: 0){
-                    Text("Daily coffee intake")
-                        .font(.headline)
-                    
-                    Stepper(coffeeAmount == 1 ? "1 cup": "\(coffeeAmount) cups", value: $coffeeAmount, in: 1...20)
+                .navigationTitle("BetterRest")
+//                .toolbar {
+//                    Button("Calculate", action: calculateBedtime)
+//                }
+                .onAppear {
+                    calculateBedtime()
                 }
-            }
-            .navigationTitle("BetterRest")
-            .toolbar {
-                Button("Calculate", action: calculateBedtime)
-            }
-            .alert(alertTitle, isPresented: $showingAlert) {
-                Button("OK"){}
-            } message: {
-                Text(alertMessage)
-            }
+                .onChange(of: wakeUp){ _ in
+                    calculateBedtime()
+                }
+//            }
+            
+//            .onChange(of: wakeUp){ _ in
+//                calculateBedtime()
+//            }
+            
+//            .alert(alertTitle, isPresented: $showingAlert) {
+//                Button("OK"){}
+//            } message: {
+//                Text(alertMessage)
+//            }
         }
     }
     
