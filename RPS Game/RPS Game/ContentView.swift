@@ -41,10 +41,6 @@ struct InstructionsView: View {
                 Text("RPS GAME")
                     .font(.largeTitle)
                     .foregroundColor(.white)
-//                Text("(Rock Paper Scissors)")
-//                    .font(.title2)
-//                    .foregroundColor(.white)
-//                    .frame(alignment: .center)
                 Text("By Josue Arana")
                     .font(.title3)
                     .foregroundColor(.white)
@@ -62,9 +58,6 @@ struct InstructionsView: View {
                     .foregroundColor(.white)
                     .background(.black)
                     .cornerRadius(50)
-                    
-                    
-                    
                 }
                 
             }// end vstack
@@ -80,6 +73,7 @@ struct ContentView: View {
     private var options = ["rock", "paper", "scissors"]
     private var rock = "rock"
     @State private var appChoice: String = "rock"
+    @State private var prevChoice: String = ""
     @State private var score: Int = 0
     @State private var isCorrect: Bool = false
     @State private var showScore = false
@@ -89,8 +83,6 @@ struct ContentView: View {
     @State private var roundsCount = 1
     @State private var correctPopUp = false
     @State private var incorrectPopUp = false
-    
-    
     
     @State private var newRound = false
     
@@ -107,17 +99,24 @@ struct ContentView: View {
     func resetGame() {
         showScore = false
         appChoice = options[Int.random(in: 0..<options.count)]
+        prevChoice = appChoice
         roundsCount = 1
         score = 0
         isActive = true
     }
     func askQuestion(){
         
-        if roundsCount >= 10 {
+        if roundsCount >= 15 {
             endGame()
         }
         
         appChoice = options[Int.random(in: 0..<options.count)]
+        if prevChoice == appChoice {
+            while prevChoice == appChoice {
+                appChoice = options[Int.random(in: 0..<options.count)]
+            }
+        }
+        
         roundsCount += 1
         timeRemaining = 3
     }
@@ -147,8 +146,7 @@ struct ContentView: View {
                 .init(color: .indigo, location: 0.75)
             ], center: .center, startRadius: 375, endRadius: 60)
                 .ignoresSafeArea()
-            
-            
+             
             
             VStack {
                 
@@ -170,7 +168,6 @@ struct ContentView: View {
                     .sheet(isPresented: $showInstructions) {
                         InstructionsView(isPresented: $showInstructions)
                     }
-                    
                     
                     Spacer()
                     
@@ -294,25 +291,6 @@ struct ContentView: View {
                                     .shadow(radius: 55)
                             }
                         }
-                        
-//                        if correctPopUp {
-//                            Image(systemName: "checkmark.circle.fill")
-//                                .resizable()
-//                                .foregroundColor(.green)
-//                                .frame(width: 200, height: 200, alignment: .center)
-////                                .offset(y:15)
-//                                .animation(.easeIn, value: correctPopUp)
-//
-//                        }
-//                        if incorrectPopUp {
-//                            Image(systemName: "x.circle.fill")
-//                                .resizable()
-//                                .foregroundColor(.red)
-//                                .frame(width: 200, height: 200, alignment: .center)
-////                                .offset(y:15)
-//                                .animation(.easeIn, value: incorrectPopUp)
-//
-//                        }
                     }
                     
                     Spacer()
@@ -349,7 +327,7 @@ struct ContentView: View {
                                     }
                                     
                                     askQuestion()
-                                    
+                                    prevChoice = appChoice
                                 }) {
                                 
                                     Image(option)
@@ -381,6 +359,7 @@ struct ContentView: View {
                 timeRemaining -= 1
             }else{
                 askQuestion()
+                prevChoice = appChoice
             }
         }
 //        .onChange(of: scenePhase) { newPhase in
