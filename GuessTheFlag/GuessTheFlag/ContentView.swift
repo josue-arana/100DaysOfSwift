@@ -20,6 +20,17 @@ struct flagImage: ViewModifier {
             .shadow(radius: 55)
     }
 }
+struct Shake: GeometryEffect {
+    var amount: CGFloat = 10
+    var shakesPerUnit = 3
+    var animatableData: CGFloat
+
+    func effectValue(size: CGSize) -> ProjectionTransform {
+        ProjectionTransform(CGAffineTransform(translationX:
+            amount * sin(animatableData * .pi * CGFloat(shakesPerUnit)),
+            y: 0))
+    }
+}
 
 struct BlueTitle : ViewModifier {
     func body(content: Content) -> some View {
@@ -56,6 +67,7 @@ struct ContentView: View {
     
     //animation variables
     @State private var animationAmount = 0.0
+    @State private var wrongChoice = 0.0
     @State private var playerChoseFlag = false
     @State private var isCorrect = false
     @State private var flagSelected = 10
@@ -104,6 +116,11 @@ struct ContentView: View {
                                 playerChoseFlag = true
                                 withAnimation {
                                     animationAmount += 360
+                                    
+                                    if !isCorrect {
+                                        wrongChoice += 1
+                                    }
+                                    
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                                     askQuestion()
@@ -113,10 +130,19 @@ struct ContentView: View {
                             } label: {
                                 
                                 if flagSelected == flag  {
-                                     
+                                    if isCorrect {
                                         FlagImage(of: countries[flag])
                                             .rotation3DEffect(.degrees(animationAmount), axis: (x: 0, y: 1, z: 0))
                                             .animation(.easeInOut(duration: 2), value: 1)
+                                    }else {
+                                        FlagImage(of: countries[flag])
+                                            .overlay(
+                                                Circle()
+                                                    .fill(.red)
+                                                    .opacity(0.5)
+                                            )
+                                            .modifier(Shake(animatableData: wrongChoice))
+                                    }
                                     
                                     
                                 }
@@ -193,6 +219,7 @@ struct ContentView: View {
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         playerChoseFlag = false
+        flagSelected = -1
     }
     
     func resetGame() {
