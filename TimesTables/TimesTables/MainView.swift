@@ -14,10 +14,9 @@ struct MainView: View {
                 .tabItem {
                     Label("Menu", systemImage: "list.dash")
                 }
-            Text("Settings Tab")
+            SettingsView()
                     .tabItem {
                         Image(systemName: "gearshape.fill")
-                        Text("Settings")
                     }
         }
     }

@@ -7,40 +7,6 @@
 
 import SwiftUI
 
-struct SettingsView: View {
-    @State private var table = 2
-    @State var questions = 5
-    let questionRange = 5...15
-    let tablesRange = 2...12
-
-    var body: some View {
-        VStack{
-            Stepper(value: $table,
-                    in: tablesRange,
-                    step: 1) {
-                Text("Practice table of \(table)")
-                    .font(.title2)
-                    .foregroundColor(Color("Selected"))
-                    .padding(.leading)
-            }
-            .padding(10)
-            
-            
-            
-            Stepper(value: $questions,
-                    in: questionRange,
-                    step: 5) {
-                Text("Questions \(questions)")
-                    .font(.title2)
-                    .foregroundColor(Color("Selected"))
-                    .padding(.leading)
-            }
-            .padding(10)
-            
-        }
-    }
-}
-
  
 
 struct ContentView: View {
@@ -66,9 +32,6 @@ struct ContentView: View {
         
         
         ZStack{
-//            Color(.white)
-//                .ignoresSafeArea()
-           
             
             VStack {
                 //Tracking Bar
@@ -107,7 +70,6 @@ struct ContentView: View {
                                    onDismiss: didDismiss) {
                                 SettingsView()
                             }
-                
                 }
                 
                 //Question Space
