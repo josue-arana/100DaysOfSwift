@@ -13,6 +13,7 @@
 		83948B1727CFF33000822D75 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83948B1627CFF33000822D75 /* Preview Assets.xcassets */; };
 		83948B1E27D2ED4900822D75 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83948B1D27D2ED4800822D75 /* MainView.swift */; };
 		83948B2027D4057200822D75 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83948B1F27D4057200822D75 /* SettingsView.swift */; };
+		83948B3C27D848B300822D75 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83948B3B27D848B200822D75 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		83948B1627CFF33000822D75 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		83948B1D27D2ED4800822D75 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		83948B1F27D4057200822D75 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		83948B3B27D848B200822D75 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				83948B1127CFF32C00822D75 /* ContentView.swift */,
 				83948B1D27D2ED4800822D75 /* MainView.swift */,
 				83948B1F27D4057200822D75 /* SettingsView.swift */,
+				83948B3B27D848B200822D75 /* Settings.swift */,
 				83948B1327CFF32F00822D75 /* Assets.xcassets */,
 				83948B1527CFF33000822D75 /* Preview Content */,
 			);
@@ -147,6 +150,7 @@
 				83948B2027D4057200822D75 /* SettingsView.swift in Sources */,
 				83948B1E27D2ED4900822D75 /* MainView.swift in Sources */,
 				83948B1027CFF32C00822D75 /* TimesTablesApp.swift in Sources */,
+				83948B3C27D848B300822D75 /* Settings.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

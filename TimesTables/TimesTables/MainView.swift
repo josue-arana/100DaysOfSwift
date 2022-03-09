@@ -8,16 +8,24 @@
 import SwiftUI
 
 struct MainView: View {
+    
+    var settings: Settings = Settings()
+    @State private var tabSelection = 2
+
+    
+    
     var body: some View {
-        TabView {
-            ContentView()
+        TabView(selection:$tabSelection) {
+            ContentView(settings: settings)
                 .tabItem {
                     Label("Menu", systemImage: "list.dash")
                 }
-            SettingsView()
-                    .tabItem {
-                        Image(systemName: "gearshape.fill")
-                    }
+                .tag(1)
+            SettingsView(settings: settings, tabSelection: $tabSelection)
+                .tabItem{
+                    Image(systemName: "gearshape.fill")
+                }
+                .tag(2)
         }
     }
 }
