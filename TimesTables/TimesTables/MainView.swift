@@ -18,7 +18,7 @@ struct MainView: View {
         TabView(selection:$tabSelection) {
             ContentView(settings: settings)
                 .tabItem {
-                    Label("Menu", systemImage: "list.dash")
+                    Label("", systemImage: "gamecontroller.fill")
                 }
                 .tag(1)
             SettingsView(settings: settings, tabSelection: $tabSelection)

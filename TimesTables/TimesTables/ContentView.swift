@@ -96,10 +96,10 @@ struct ContentView: View {
                 VStack {
                     HStack{
                         Text("Table of \(settings.table+2)")
-                            .font(.title2)
+                            .font(isActive ? .title2 : .system(size: 50))
                             .foregroundColor(Color("Selected"))
                             .padding(.leading)
-                        
+                            .offset(x: isActive ? 0 : 50, y: isActive ? 0 : 50)
                         Spacer()
                     }
                     .padding(.bottom, 35)
@@ -228,6 +228,7 @@ struct ContentView: View {
                 .font(.system(size: 17))
                 .cornerRadius(15)
                 .padding()
+                .offset(y: isActive ? 0 : -90)
                 
                 if !isActive {
                     Spacer()
@@ -264,13 +265,13 @@ struct ContentView: View {
     }
     
     func restart() {
-        
-        generateAnswerOptions()
-        tables = [1,2,3,4,5,6,7,8,9,10,11,12]
-        tables.shuffle()
-        xnumber = tables.removeFirst()
-        answerNumber = -1
-        questions -= 1
+        isActive = false
+//        generateAnswerOptions()
+//        tables = [1,2,3,4,5,6,7,8,9,10,11,12]
+//        tables.shuffle()
+//        xnumber = tables.removeFirst()
+//        answerNumber = -1
+//        questions -= 1
     }
     
     func checkQuestion(choice: Int) {
