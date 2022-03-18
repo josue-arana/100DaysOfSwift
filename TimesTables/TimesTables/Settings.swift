@@ -10,4 +10,5 @@ import Foundation
 class Settings: ObservableObject {
     @Published var table: Int = 2
     @Published var questions: Int = 5
+    @Published var soundEffectsOn: Bool = true
 }
