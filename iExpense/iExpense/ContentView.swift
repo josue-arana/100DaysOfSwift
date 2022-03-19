@@ -7,55 +7,46 @@
 
 import SwiftUI
 
-struct User : Codable {
-    let firstName: String
-    let lastName: String
-}
-
 struct ContentView: View {
-    @State private var numbers = [Int]()
-    @State private var current = 0
+    @StateObject var expenses = Expenses()
     
-    @State private var user = User(firstName: "Juan", lastName: "Melon")
+    @State private var showingAddExpense = false
     
     var body: some View {
         
-        
-        
         NavigationView {
-            VStack{
-                List {
-                    ForEach(numbers, id: \.self) {
-                        Text("Row \($0)")
+            List {
+                ForEach(expenses.items) { item in
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text(item.name)
+                                .font(.headline)
+                            Text(item.type)
+                        }
+                        Spacer()
+                        Text(item.amount, format: .currency(code: "USD") )
                     }
-                    .onDelete(perform: removeRows)
+                    
                 }
-                
-                Button("Add number"){
-                    numbers.append(current)
-                    current += 1
-                    
-                    //save user
-                    let encoder = JSONEncoder()
-                    if let data = try? encoder.encode(user) {
-                        UserDefaults.standard.set(data, forKey: "UserData")
-                    }
-                        
-                    
-                    
+                .onDelete(perform: removeItems )
+            }
+            .navigationTitle("iExpense")
+            .toolbar {
+                Button {
+                    showingAddExpense = true
+                } label: {
+                    Image(systemName: "plus")
                 }
             }
-            .navigationTitle("OnDelete()")
-            .toolbar {
-                EditButton()
+            .sheet(isPresented: $showingAddExpense){
+                AddView(expenses: expenses)
             }
         }
         
-        
     }
     
-    func removeRows(at offsets: IndexSet ){
-        numbers.remove(atOffsets: offsets)
+    func removeItems (at offsets: IndexSet) {
+        expenses.items.remove(atOffsets: offsets)
     }
 }
 
