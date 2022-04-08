@@ -4,7 +4,6 @@
 //
 //  Created by Josue on 3/30/22.
 //
-
 import SwiftUI
 
 struct GridLayout: View {
@@ -68,7 +67,6 @@ struct ListLayout: View {
     let rows = [
         GridItem(.adaptive(minimum: 150))
     ]
-    
     
     var body: some View {
         ScrollView {
@@ -136,9 +134,7 @@ struct ContentView: View {
             }
         }
     }
-}
-
-
+} 
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

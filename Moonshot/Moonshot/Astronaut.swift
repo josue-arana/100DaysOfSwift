@@ -12,5 +12,3 @@ struct Astronaut: Codable, Identifiable {
     let name: String
     let description: String
 }
-
-
