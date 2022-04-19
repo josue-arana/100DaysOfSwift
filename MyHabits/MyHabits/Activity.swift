@@ -5,10 +5,11 @@
 //  Created by Josue on 4/18/22.
 //
 
-import SwiftUI
+import Foundation
 
 // This struct holds a single activity.
-struct Activity: Identifiable {
+struct Activity : Identifiable {
+    
     var id = UUID()
     let title: String
     let description: String

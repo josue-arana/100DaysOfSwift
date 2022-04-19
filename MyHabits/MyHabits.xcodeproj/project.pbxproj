@@ -15,6 +15,7 @@
 		830D5F4B280E40AB009308FB /* Activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D5F4A280E40AB009308FB /* Activities.swift */; };
 		830D5F4D280E4448009308FB /* ActivityDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D5F4C280E4448009308FB /* ActivityDetail.swift */; };
 		830D5F51280E49EE009308FB /* Color-Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D5F50280E49EE009308FB /* Color-Theme.swift */; };
+		830D5F53280E6C89009308FB /* AddHabit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830D5F52280E6C89009308FB /* AddHabit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		830D5F4A280E40AB009308FB /* Activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Activities.swift; sourceTree = "<group>"; };
 		830D5F4C280E4448009308FB /* ActivityDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityDetail.swift; sourceTree = "<group>"; };
 		830D5F50280E49EE009308FB /* Color-Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color-Theme.swift"; sourceTree = "<group>"; };
+		830D5F52280E6C89009308FB /* AddHabit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddHabit.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 			children = (
 				830D5F38280E3EDE009308FB /* MyHabitsApp.swift */,
 				830D5F3A280E3EDE009308FB /* ContentView.swift */,
+				830D5F52280E6C89009308FB /* AddHabit.swift */,
 				830D5F50280E49EE009308FB /* Color-Theme.swift */,
 				830D5F4C280E4448009308FB /* ActivityDetail.swift */,
 				830D5F48280E4064009308FB /* Activity.swift */,
@@ -150,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				830D5F4B280E40AB009308FB /* Activities.swift in Sources */,
+				830D5F53280E6C89009308FB /* AddHabit.swift in Sources */,
 				830D5F51280E49EE009308FB /* Color-Theme.swift in Sources */,
 				830D5F49280E4064009308FB /* Activity.swift in Sources */,
 				830D5F4D280E4448009308FB /* ActivityDetail.swift in Sources */,

@@ -10,7 +10,9 @@ import SwiftUI
 struct ContentView: View {
     
     @StateObject var activityList = Activities()
-    
+    @State private var showHabits: Bool  = true
+    @State private var showingAddHabit : Bool  = false
+
     let tips = [
         """
         How to Be
@@ -40,91 +42,131 @@ struct ContentView: View {
             ScrollView {
                 
                 Group {
-                    
-                    ScrollView(.horizontal, showsIndicators: true){
-                         
+                    HStack {
+                        Spacer()
+                        Button{
+                            showHabits = true
+                        } label: {
+                            Text("Habits")
+                                .font(.title2)
                             
-                            
-                        HStack(spacing: 20) {
-                                ForEach(tips, id: \.self){ tip in
-                                    
-                                    
-                                    VStack(alignment: .leading) {
-                                        Text(tip)
-                                            .font(.title)
-                                        Button {  } label: {
-                                            Text("Start")
-                                                .font(.title3)
-                                                .foregroundColor(.black)
-                                                .padding(10)
-                                                .frame(width: 100, height: 25)
-                                                
-                                        }
-                                        .background(.yellow)
-                                        .cornerRadius(25)
-                                         
-                                        Spacer()
-                                        HStack{
-                                            Image(systemName: "calendar")
-                                            Text("15 Days")
-                                                .font(.title2)
-                                                .foregroundColor(.gray)
-                                                
-                                        }
-                                            
-                                    }
-                                    .frame(width: 300)
-                                    .padding(20)
-                                    .background(.darkBackground.opacity(0.8))
-                                    .cornerRadius(20)
-                                }
-                                .frame(maxWidth: .infinity)
-                            }
-                            
-                            .padding()
-                                
-                         
-                        
-                        
+                            .foregroundColor(.white)
+                        }
+                        Spacer()
+                        Text("|")
+                            .font(.title2)
+                        Spacer()
+                        Button{
+                            showHabits = false
+                        } label: {
+                            Text("Programs")
+                                .font(.title2)
+                                .foregroundColor(.white)
+                        }
+                        Spacer()
                     }
+                    .padding()
                     
-                    
-                    
-                
-                
-                    List {
-                        ForEach(activityList.activities) { activity in
-                            NavigationLink {
-                                ActivityDetail(title: "Walk", description: "Walk 1 mile every day", streak: 0)
-                            } label: {
-                                VStack {
-                                    
-                                    ZStack {
-                                        Circle()
-                                            .fill(.primary)
-                                            .frame(width: 150, height: 150)
-                                            .opacity(0.5)
-                                        Image(systemName: "figure.walk")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 100, height: 100, alignment: .center)
-                                            .foregroundColor(.white)
-                                            .padding()
+                    ScrollView(.vertical, showsIndicators: false){
+                          
+                        
+                        if showHabits {
+                        
+                            Section ("Current Habits") {
+//                                List {
+                                    ForEach(activityList.activities) { activity in
+                                        NavigationLink {
+                                            ActivityDetail(title: "Walk", description: "Walk 1 mile every day", streak: 0)
+                                        } label: {
+                                            HStack {
+                                                
+                                                ZStack {
+                                                    Circle()
+                                                        .fill(.primary)
+                                                        .frame(width: 150, height: 150)
+                                                        .opacity(0.5)
+                                                    Image(systemName: "figure.walk")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 100, height: 100, alignment: .center)
+                                                        .foregroundColor(.white)
+                                                        .padding()
+                                                }
+                                                
+                                                Text("Count \(activityList.activities.count)")
+                                            }
+                                        }
                                     }
-                                    
-                                        
-                                }
+//                                }
                             }
+                            .background(.darkBackground.opacity(0.5))
+                            
+                        }else{
+                                VStack(spacing: 20) {
+                                        ForEach(tips, id: \.self){ tip in
+                                            
+                                            HStack{
+                                                
+                                                VStack(alignment: .leading) {
+                                                    Text(tip)
+                                                        .font(.system(size: 17, weight: .bold, design: .rounded))
+                                                    
+                                                    Button {  } label: {
+                                                        Text("Start")
+                                                            .font(.system(size: 15))
+                                                            .foregroundColor(.black)
+                                                            .padding(10)
+                                                            .frame(width: 60, height: 25)
+                                                            
+                                                    }
+                                                    .background(.yellow)
+                                                    .cornerRadius(25)
+                                                     
+                                                    Spacer()
+                                                    HStack{
+                                                        Image(systemName: "calendar")
+                                                        Text("15 Days")
+                                                            .font(.system(size: 17))
+                                                    }
+                                                }
+                                                .frame(height: 130)
+                                                .padding(20)
+                                                .background(.blue.opacity(0.7))
+                                                
+                                                Spacer()
+                                            
+                                                
+                                            }
+                                            .frame(width: 320)
+                                            .background(Image("Image"))
+                                            .cornerRadius(20)
+                                             
+                                        }
+                                    }
+                                    .padding()
+                                        
                         }
                     }
-                    
                     
                     
                 }
             }
             .navigationTitle("HabitTracker")
-            .background(Color(.black).opacity(0.5))
+            .background(.darkBackground)
             .preferredColorScheme(.dark)
+            .toolbar {
+                Button{
+                    showingAddHabit = true
+                } label: {
+                    Image(systemName: "plus.circle.fill")
+                        .resizable()
+                        .frame(width: 35, height: 35)
+                }
+            }
+            .sheet(isPresented: $showingAddHabit){
+                AddHabit(activities: activityList)
+                
+            }
             
         }
     }
