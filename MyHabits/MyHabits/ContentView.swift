@@ -83,18 +83,37 @@ struct ContentView: View {
                                                 ZStack {
                                                     Circle()
                                                         .fill(.primary)
-                                                        .frame(width: 150, height: 150)
+                                                        .frame(width: 65, height: 65)
                                                         .opacity(0.5)
                                                     Image(systemName: "figure.walk")
                                                         .resizable()
                                                         .scaledToFit()
-                                                        .frame(width: 100, height: 100, alignment: .center)
+                                                        .frame(width: 40, height: 40, alignment: .center)
                                                         .foregroundColor(.white)
                                                         .padding()
                                                 }
+                                                .padding(.leading, 10)
                                                 
-                                                Text("Count \(activityList.activities.count)")
+                                                VStack (alignment: .leading){
+                                                    Text(activity.title)
+                                                        .font(.system(size: 20))
+                                                    Text(activity.description)
+                                                        .font(.system(size: 15))
+                                                }
+                                                
+                                                Spacer()
+                                                VStack {
+                                                    Text("\(activity.streak)")
+                                                        .font(.title3)
+                                                    Text("Streak")
+                                                        .font(.system(size: 10))
+                                                }
+                                                .padding(.horizontal)
+                                                
                                             }
+                                            .frame(width: 300, height: 75)
+                                            .background(.white)
+                                            .cornerRadius(25)
                                         }
                                     }
 //                                }
