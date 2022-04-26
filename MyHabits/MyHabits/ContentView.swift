@@ -72,35 +72,34 @@ struct ContentView: View {
                         
                         if showHabits {
                         
-                            Section ("Current Habits") {
+                            Section {
 //                                List {
                                     ForEach(activityList.activities) { activity in
                                         NavigationLink {
-                                            ActivityDetail(title: "Walk", description: "Walk 1 mile every day", streak: 0)
+                                            ActivityDetail(title: activity.title, description: activity.description, streak: activity.streak)
                                         } label: {
                                             HStack {
                                                 
-                                                ZStack {
-                                                    Circle()
-                                                        .fill(.primary)
-                                                        .frame(width: 65, height: 65)
-                                                        .opacity(0.5)
-                                                    Image(systemName: "figure.walk")
-                                                        .resizable()
-                                                        .scaledToFit()
-                                                        .frame(width: 40, height: 40, alignment: .center)
-                                                        .foregroundColor(.white)
-                                                        .padding()
-                                                }
-                                                .padding(.leading, 10)
+//                                                ZStack {
+//                                                    Circle()
+//                                                        .fill(.primary)
+//                                                        .frame(width: 65, height: 65)
+//                                                        .opacity(0.5)
+//                                                    Image(systemName: "figure.walk")
+//                                                        .resizable()
+//                                                        .scaledToFit()
+//                                                        .frame(width: 40, height: 40, alignment: .center)
+//                                                        .foregroundColor(.white)
+//                                                        .padding()
+//                                                }
+//                                                .padding(.leading, 10)
                                                 
                                                 VStack (alignment: .leading){
                                                     Text(activity.title)
                                                         .font(.system(size: 20))
                                                     Text(activity.description)
                                                         .font(.system(size: 15))
-                                                }
-                                                
+                                                }.padding()
                                                 Spacer()
                                                 VStack {
                                                     Text("\(activity.streak)")
@@ -108,7 +107,7 @@ struct ContentView: View {
                                                     Text("Streak")
                                                         .font(.system(size: 10))
                                                 }
-                                                .padding(.horizontal)
+                                                .padding()
                                                 
                                             }
                                             .frame(width: 300, height: 75)
@@ -183,7 +182,7 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showingAddHabit){
-                AddHabit(activities: activityList)
+                AddHabit(activities: activityList, saveLabel: false)
                 
             }
             

@@ -11,44 +11,58 @@ import SwiftUI
 struct AddHabit: View {
     
     @ObservedObject var activities: Activities
+    @State var saveLabel: Bool
+    @State private var selectedButtonIdx = -1
+    
+    @Environment(\.dismiss) private var dismiss
     
     private let suggestedHabbits: [Activity] = [
-        Activity(title: "Trending Habbits", description: "Take a step in the right direction", streak: 5),
-        Activity(title: "Staying at Home", description: "Use this time to do soemthing new", streak: 3),
-        Activity(title: "Must-have Habits", description: "Small habits, big results", streak: 1)
+        Activity(title: "Drink More Water", description: "Take a step in the right direction", streak: 0),
+        Activity(title: "Read 5 Pages a Day", description: "Use this time to do soemthing new", streak: 0),
+        Activity(title: "Workout", description: "Small habits, big results", streak: 1)
     ]
+    @State private var selectedActivity: Activity = Activity(title: "", description: "", streak: 0)
     
     var body: some View {
         NavigationView{
             
             
             ScrollView(.vertical) {
-                 
+
                 
-                
-                List(suggestedHabbits) {
-                    Text($0.title)
-                }
-                
-                    ForEach(suggestedHabbits) { habbit in
+                ForEach(0..<3) { i in
                         HStack {
-                            VStack (alignment: .leading){
-                                Text(habbit.title)
-                                    .font(.system(size: 20))
-                                Text(habbit.description)
-                                    .font(.system(size: 15))
+                            
+                            Button {
+                                selectedActivity.title = suggestedHabbits[i].title
+                                selectedActivity.description = suggestedHabbits[i].description
+                                selectedActivity.streak = suggestedHabbits[i].streak
+                                saveLabel = true
+                                selectedButtonIdx = i
+                            } label: {
+                                VStack (alignment: .leading){
+                                    Text(suggestedHabbits[i].title)
+                                        .font(.system(size: 20))
+                                    Text(suggestedHabbits[i].description)
+                                        .font(.system(size: 15))
+                                }
+                                Spacer()
+                                VStack {
+                                    Text("\(suggestedHabbits[i].streak)")
+                                        .font(.title3)
+                                    Text("Streak")
+                                        .font(.system(size: 10))
+                                }
                             }
-                            Spacer()
-                            VStack {
-                                Text("\(habbit.streak)")
-                                    .font(.title3)
-                                Text("Streak")
-                                    .font(.system(size: 10))
-                            }
+                            .padding()
+                            .foregroundColor(.primary)
+                            .background( i == selectedButtonIdx ? .blue.opacity(0.3) : .blue.opacity(0.6))
+                            .cornerRadius(20)
+                            
+                            
                         }
-                        .padding()
-                        .background(.darkBackground.opacity(0.6))
-                        .cornerRadius(20)
+                         
+                        
                     }
                     .padding(.horizontal)
 //                }
@@ -57,17 +71,25 @@ struct AddHabit: View {
             .navigationTitle("Add Habit")
             .preferredColorScheme(.dark)
             .toolbar {
-                Button("Save"){
-                    let habit = Activity(title: "New Habit", description: "Description", streak: 1)
-                    activities.activities.append(habit)
+                
+                Button( saveLabel ? "Save" : "Close"){
+                    if saveLabel {
+                        activities.activities.append(selectedActivity)
+                        dismiss()
+                    } else {
+                        dismiss()
+                    }
                 }
             }
         }
+        
+    
     }
+     
 }
 
 struct AddHabit_Previews: PreviewProvider {
     static var previews: some View {
-        AddHabit(activities: Activities())
+        AddHabit(activities: Activities(), saveLabel: false)
     }
 }

@@ -11,9 +11,9 @@ import Foundation
 struct Activity : Identifiable {
     
     var id = UUID()
-    let title: String
-    let description: String
-    let streak: Int
+    var title: String
+    var description: String
+    var streak: Int
     
 }
  

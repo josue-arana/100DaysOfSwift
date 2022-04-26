@@ -13,7 +13,7 @@ class Activities: ObservableObject {
     @Published var activities = [Activity]()
     
     init(){
-        activities = [Activity(title: "Walk", description: "around the park", streak: 3)]
+        activities = [Activity(title: "Walk", description: "Walk one mile a day", streak: 3)]
     }
     
 //    @Published var title: String
