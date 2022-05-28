@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var order = Order()
+    @StateObject var order = Order()              
     
     
     var body: some View {

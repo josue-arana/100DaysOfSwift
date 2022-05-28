@@ -12,6 +12,7 @@ struct CheckoutView: View {
     @ObservedObject var order: Order
     @State private var confirmationMessage = ""
     @State private var showConfirmation = false
+    @State private var alertTitle = "Thank you!!"
     
     var body: some View {
         ScrollView {
@@ -42,7 +43,7 @@ struct CheckoutView: View {
         }
         .navigationTitle("Check out")
         .navigationBarTitleDisplayMode(.inline)
-        .alert("Thank you!", isPresented: $showConfirmation) {
+        .alert(alertTitle, isPresented: $showConfirmation) {
             Button("OK"){}
         } message: {
             Text(confirmationMessage)
@@ -59,9 +60,10 @@ struct CheckoutView: View {
         let url = URL(string: "https://reqres.in/api/cupcakes")!
         var request = URLRequest(url: url)
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpMethod = "POST"
+//        request.httpMethod = "POST"
         
         do {
+            
             let (data, _) = try await URLSession.shared.upload(for: request, from: encoded)
             //handle the result
             
@@ -71,6 +73,9 @@ struct CheckoutView: View {
             
         } catch {
             print("Checkout failed")
+            confirmationMessage = "Ops! Error placing your order. Make sure you have internet connection."
+            showConfirmation = true
+            alertTitle = "Error!"
         }
         
     }
